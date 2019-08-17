@@ -24,20 +24,24 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-var findDate =(date)=>{
+var isUnix =(date)=>{
+  var parsed = parseInt(date)
+  var dateObj = new Date(parsed)
+    var unix = dateObj.getTime()
+    var utc = dateObj
+    return {"unix":unix,"utc":utc}
+}
+
+var isString =(date)=>{
   var dateObj = new Date(date)
-  var result;
   var unix = dateObj.getTime()
   var utc = dateObj
   console.log(unix)
   console.log(utc)
-  if(date)
-  
-
-
 }
 
-findDate(2019-12-12)
+isString("2000-11-11")
+
 
 app.get('/api/:date_string',(req,res)=>{
   res.json()
