@@ -38,11 +38,11 @@ var isString =(date)=>{
 return {"unix":unix,"utc":utc}
 }
 
-// isString()
-// isUnix()
+app.get('/api/timestamp',(req,res)=>{
+  res.json({"unix":`${new Date().getTime()}`,"utc":`${new Date().toUTCString()}`})
+})
 
-
-app.get('/api/:date_string',(req,res)=>{
+app.get('/api/timestamp/:date_string',(req,res)=>{
   var result;
   
   var date = parseInt(req.params.date_string)
@@ -54,6 +54,8 @@ app.get('/api/:date_string',(req,res)=>{
   }
   res.json(result)
 })
+
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
