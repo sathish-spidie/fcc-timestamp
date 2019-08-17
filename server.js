@@ -25,26 +25,36 @@ app.get("/api/hello", function (req, res) {
 });
 
 var isUnix =(date)=>{
-  var parsed = parseInt(date)
-  var dateObj = new Date(parsed)
+  var dateObj = new Date(date)
     var unix = dateObj.getTime()
     var utc = dateObj
     return {"unix":unix,"utc":utc}
 }
 
 var isString =(date)=>{
-  var dateObj = new Date(date)
-  var unix = dateObj.getTime()
+  var dateObj = new Date(date).toUTCString()
+  var unix = new Date(date).getTime()
   var utc = dateObj
-  console.log(unix)
-  console.log(utc)
+return {"unix":unix,"utc":utc}
 }
 
-isString("2000-11-11")
+isString("2019-12-2")
 
 
 app.get('/api/:date_string',(req,res)=>{
-  res.json()
+  var result;
+  if(req.params.date_string==""){
+     result = {"unix":null,"utc":"Invalid Date"}
+    return result;
+  }
+  var date = parseInt(req.params.date_string)
+  
+  if(date < 30000){
+    result = isUnix(date)
+  }else{
+   result = isString(req.params.date_string)
+  }
+  res.json(result)
 })
 
 // listen for requests :)
