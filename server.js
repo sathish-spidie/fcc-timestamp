@@ -27,7 +27,7 @@ app.get("/api/hello", function (req, res) {
 var isUnix =(date)=>{
   var dateObj = new Date(date)
     var unix = dateObj.getTime()
-    var utc = dateObj
+    var utc = dateObj.toUTCString()
     return {"unix":unix,"utc":utc}
 }
 
@@ -38,18 +38,16 @@ var isString =(date)=>{
 return {"unix":unix,"utc":utc}
 }
 
-isString("2019-12-2")
+// isString()
+// isUnix()
 
 
 app.get('/api/:date_string',(req,res)=>{
   var result;
-  if(req.params.date_string==""){
-     result = {"unix":null,"utc":"Invalid Date"}
-    return result;
-  }
+  
   var date = parseInt(req.params.date_string)
   
-  if(date < 30000){
+  if(date > 30000){
     result = isUnix(date)
   }else{
    result = isString(req.params.date_string)
