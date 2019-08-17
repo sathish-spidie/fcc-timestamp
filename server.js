@@ -24,7 +24,24 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+var findDate =(date)=>{
+  var dateObj = new Date(date)
+  var result;
+  var unix = dateObj.getTime()
+  var utc = dateObj
+  console.log(unix)
+  console.log(utc)
+  if(date)
+  
 
+
+}
+
+findDate(2019-12-12)
+
+app.get('/api/:date_string',(req,res)=>{
+  res.json()
+})
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
